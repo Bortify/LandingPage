@@ -1,7 +1,9 @@
-import { Button } from "@/components/ui/button";
+import Typography from '@/components/Typography'
 
 export default function Home() {
   return (
-    <p>This is fortify landing page. Om namah shivaye</p>
+    <>
+      <Typography.Heading variant='h6'>Om namah shivay</Typography.Heading>
+    </>
   )
 }

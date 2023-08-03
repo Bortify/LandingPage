@@ -1,5 +1,6 @@
 import React from 'react'
 import './globals.css'
+import NavBar from '@/components/NavBar'
 
 interface Props {
   children: React.ReactNode
@@ -8,7 +9,10 @@ interface Props {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang='en'>
-      <body>{children}</body>
+      <body>
+        <NavBar />
+        {children}
+      </body>
     </html>
   )
 }
