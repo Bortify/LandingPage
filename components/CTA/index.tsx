@@ -31,20 +31,7 @@ const CTA: React.FC<{}> = () => {
                 key={index}
                 observerCallBack={(isIntersecting, component) => {
                   if (isIntersecting && imgRef.current) {
-                    imgRef.current.style.opacity = '0'
                     setImg(String(component))
-                    imgRef.current.addEventListener(
-                      'transitionend',
-                      () => {
-                        console.log('hgcgchgh')
-                        if (imgRef.current) {
-                          imgRef.current.style.opacity = '1'
-                        }
-                      },
-                      {
-                        once: true,
-                      }
-                    )
                   }
                 }}
               />
@@ -58,7 +45,6 @@ const CTA: React.FC<{}> = () => {
               height={600}
               alt='image'
               className='transition-all duration-200 ease-in-out'
-              loading='lazy'
             />
           </div>
         </div>
