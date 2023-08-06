@@ -1,18 +1,17 @@
 import React, { DetailedHTMLProps, HTMLAttributes } from 'react'
 
 import { cn } from '@/lib/utils'
+
 import Fonts from '../Font'
+import { FontPropTypes } from '../Types'
+import { BoldnessToFontWeightMap } from '../constants'
 
 interface HeadingPropsType
   extends DetailedHTMLProps<
     HTMLAttributes<HTMLHeadingElement>,
     HTMLHeadingElement
-  > {
+  >, FontPropTypes {
   variant: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-  italic?: Boolean
-  underline?: Boolean
-  boldness?: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
-  fontFamily?: 'inter' | 'manrope' | 'poppins'
 }
 
 const Heading: React.FC<HeadingPropsType> = ({
@@ -55,24 +54,12 @@ const Heading: React.FC<HeadingPropsType> = ({
 }
 
 const VariantToStyleMap = {
-  h1: 'text-6xl',
-  h2: 'text-5xl',
-  h3: 'text-4xl',
-  h4: 'text-3xl',
-  h5: 'text-2xl',
-  h6: 'text-xl',
-}
-
-const BoldnessToFontWeightMap = {
-  100: 'font-thin',
-  200: 'font-extralight',
-  300: 'font-light',
-  400: 'font-normal',
-  500: 'font-medium',
-  600: 'font-semibold',
-  700: 'font-bold',
-  800: 'font-extrabold',
-  900: 'font-black',
+  h1: 'text-4xl md:text-6xl',
+  h2: 'text-3xl md:text-5xl',
+  h3: 'text-2xl md:text-4xl',
+  h4: 'text-xl md:text-3xl',
+  h5: 'text-lg md:text-2xl',
+  h6: 'text-base md:text-xl',
 }
 
 export default Heading

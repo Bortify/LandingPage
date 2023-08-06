@@ -10,7 +10,9 @@ import Fonts from '../Typography/Font'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 
 const NavBar: React.FC<{}> = () => (
-  <nav className='w-full grid place-items-center py-8 px-10'>
+  <nav
+    className='w-full grid place-items-center py-8 px-10 sticky top-0 z-50 transition-all duration-300 ease-in-out'
+    id='botgpt-nav-bar'>
     <div className='max-w-98 w-full h-10 flex items-center justify-between'>
       <Link href='/'>
         <Logo className='w-24 md:w-32' />
@@ -47,10 +49,7 @@ const CollapsableNav: React.FC<{}> = () => {
           <Link
             href={href}
             key={index}
-            className={cn(
-              'text-lg font-semibold text-gray-800',
-              Fonts.inter
-            )}>
+            className={cn('text-lg font-semibold text-gray-800', Fonts.inter)}>
             {label}
           </Link>
         ))}

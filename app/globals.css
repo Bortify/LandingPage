@@ -76,3 +76,19 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* for fadein animation */
+
+.slide-in-right {
+  transform: translateX(20%); /* Starts the image off the right of the element */
+  animation: slideInRight ease 1s forwards; /* Change the duration as per your need */
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(20%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
