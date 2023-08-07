@@ -1,8 +1,3 @@
-import Link from 'next/link'
-import Container from '../Container'
-import { Logo } from '../Icons'
-
-import Links from '@/static-config/links.json'
 import React from 'react'
 import {
   FacebookIcon,
@@ -10,6 +5,13 @@ import {
   LinkedinIcon,
   TwitterIcon,
 } from 'lucide-react'
+import Link from 'next/link'
+
+import Links from '@/static-config/links.json'
+
+import Container from '../Container'
+import { Logo } from '../Icons'
+
 
 const Footer: React.FC<{}> = () => (
   <footer className='bg-gray-50'>

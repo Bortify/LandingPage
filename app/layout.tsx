@@ -14,7 +14,13 @@ export default function RootLayout({ children }: Props) {
       <body>
         <NavBar />
         {children}
-        <Footer/>
+        <Footer />
+        <script
+          type='text/javascript'
+          id='hs-script-loader'
+          async
+          defer
+          src='//js.hs-scripts.com/43160068.js'></script>
       </body>
     </html>
   )

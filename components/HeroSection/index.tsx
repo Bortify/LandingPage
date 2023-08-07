@@ -54,13 +54,28 @@ const HeroSection: React.FC<{}> = () => {
   return (
     <main ref={elemRef}>
       <Container className='h-[calc(100vh_-_104px)] overflow-hidden'>
-        <div className='w-full py-20 px-10 grid lg:grid-rows-1 lg:grid-cols-2 h-full '>
+        <div className='w-full lg:py-20 px-10 grid lg:grid-rows-1 lg:grid-cols-2 h-full '>
           <div className='flex flex-col items-start justify-center'>
             <Typography.Heading
               variant='h6'
-              className='text-lg text-gray-500 mb-5'>
+              className='text-lg text-gray-500 mb-3 lg:mb-5'>
               GPT powered chat bot for e-commerce stores{' '}
             </Typography.Heading>
+            <div className='flex items-center justify-start gap-2 mb-5 w-full lg:hidden'>
+              <Typography.Heading
+                variant='h6'
+                className='text-gray-500 text-xs'>
+                Powered by{' '}
+              </Typography.Heading>
+              <Image
+                src={
+                  'https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg'
+                }
+                width={100}
+                height={100}
+                alt='openai'
+              />
+            </div>
             <Typography.Heading
               variant='h1'
               boldness={800}
@@ -78,20 +93,22 @@ const HeroSection: React.FC<{}> = () => {
             </Typography.Content>
             <div className='flex gap-2.5 flex-wrap'>
               <Button>Get an Early Bird Discount</Button>
-              <Button variant='ghost' className='group'>
+              <Button variant='ghost' className='group lg:flex hidden'>
                 Learn More{' '}
                 <MoveRight className='ml-2 group-hover:translate-x-2 duration-300 ease-in-out transition-transform' />
               </Button>
             </div>
-            <div className='flex items-center justify-start gap-2 mt-5 w-full'>
-              <Typography.Heading variant='h6' className='text-gray-500'>
+            <div className='hidden items-center justify-start gap-2 mt-5 w-full lg:flex'>
+              <Typography.Heading
+                variant='h6'
+                className='text-gray-500 text-xs'>
                 Powered by{' '}
               </Typography.Heading>
               <Image
                 src={
                   'https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg'
                 }
-                width={150}
+                width={100}
                 height={100}
                 alt='openai'
               />
