@@ -6,8 +6,14 @@ import Section from './Sections'
 import Image from 'next/image'
 
 const CTA: React.FC<{}> = () => {
-  const [img, setImg] = useState<string>(ContentArray[0].component)
-  const imgRef = useRef<HTMLImageElement>(null)
+  const staticContainerRef = useRef<HTMLDivElement>(null)
+  const dynamicContainerRef = useRef<HTMLDivElement>(null)
+
+  const [staticContainerWidth, setWidth] = useState<number>(0)
+
+  useEffect(() => {
+    setWidth(staticContainerRef.current?.clientWidth || 0)
+  }, [])
 
   return (
     <>
@@ -30,22 +36,47 @@ const CTA: React.FC<{}> = () => {
                 {...item}
                 key={index}
                 observerCallBack={(isIntersecting, component) => {
-                  if (isIntersecting && imgRef.current) {
-                    setImg(String(component))
+                  if (isIntersecting && dynamicContainerRef.current) {
+                    const transform =
+                      ContentArray.find(
+                        ({ component: comp }) => comp === component
+                      )?.transform || 'translateX(0px)'
+                    dynamicContainerRef.current.style.transform = transform
                   }
                 }}
               />
             ))}
           </div>
-          <div className='h-[calc(100vh_-_104px)] sticky top-[104px] flex items-center justify-center'>
-            <Image
-              ref={imgRef}
-              src={img}
-              width={600}
-              height={600}
-              alt='image'
-              className='transition-all duration-200 ease-in-out'
-            />
+          <div
+            ref={staticContainerRef}
+            className='h-[calc(100vh_-_104px)] sticky top-[104px] flex items-center justify-start w-full overflow-hidden'>
+            <div className='w-full h-full relative'>
+              <div
+                ref={dynamicContainerRef}
+                className={
+                  'h-full flex transition-transform duration-300 ease-in-out'
+                }
+                style={{
+                  width: `${staticContainerWidth * ContentArray.length}px`,
+                }}>
+                {ContentArray.map(({ component }, index) => (
+                  <div
+                    key={index}
+                    className='flex items-center justify-center'
+                    style={{
+                      width: `${staticContainerWidth}px`,
+                    }}>
+                    <Image
+                      src={component}
+                      width={600}
+                      height={600}
+                      alt='image'
+                      className='transition-all duration-200 ease-in-out'
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </Container>
@@ -63,6 +94,7 @@ const ContentArray = [
       'With AI-powered product recommendation, the chatbot analyzes customer behavior and preferences to intelligently suggest relevant items. It tailors recommendations based on browsing history, past purchases, and cart additions, maximizing personalization and driving increased sales.',
     link: '/',
     component: '/cta/first.png',
+    transform: 'translateX(0%)',
   },
   {
     title: `It's time to unchain from the screen. Let our AI with a human touch handle it!`,
@@ -70,6 +102,7 @@ const ContentArray = [
       'Deliver 24/7 customer support with an AI-powered chatbot driven by GPT models. Customers receive human-like interactions, instant responses, troubleshooting guidance, and product information at any time. This human touch enhances the customer experience, fostering trust and loyalty beyond regular business hours.',
     link: '/',
     component: '/cta/second.png',
+    transform: 'translateX(-25%)',
   },
   {
     title: `Say Goodbye to Cart Abandonment Worries! Trust us to Handle it Our Way.`,
@@ -77,6 +110,7 @@ const ContentArray = [
       'Create a seamless shopping experience and maximize conversions by preventing cart abandonment. Utilize strategies such as real-time reminders, personalized incentives, instant assistance, streamlined checkout, trust signals, exit pop-ups, and targeted follow-up emails. Enhance customer satisfaction, address concerns, and optimize sales performance for your e-commerce store.',
     link: '/',
     component: '/cta/third.png',
+    transform: 'translateX(-50%)',
   },
   {
     title: `Understand Your Customers Deeply with Advanced Insights - Don't Assume, Be Data-Driven!`,
@@ -84,5 +118,6 @@ const ContentArray = [
       'Gain valuable insights with our advanced analytics. Measure conversion rate, average order value, customer satisfaction, and inventory management. Optimize sales and enhance the customer experience for sustainable growth.',
     link: '/',
     component: '/cta/fourth.png',
+    transform: 'translateX(-75%)',
   },
 ]
