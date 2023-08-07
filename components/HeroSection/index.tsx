@@ -42,10 +42,10 @@ const HeroSection: React.FC<{}> = () => {
       (entries, observer) => {
         entries.forEach((entry) => {
           const ratio = entry.intersectionRatio
-          const val = 100-Math.round(ratio * 100)
+          const val = 100 - Math.round(ratio * 100)
           if (chatRef.current?.style && imgRef.current?.style) {
-            chatRef.current.style.transform = `translateX(${val/5}%)`
-            imgRef.current.style.transform = `translateX(-${val/5}%)`
+            chatRef.current.style.transform = `translateX(${val / 5}%)`
+            imgRef.current.style.transform = `translateX(-${val / 5}%)`
           }
         })
       }
@@ -53,8 +53,8 @@ const HeroSection: React.FC<{}> = () => {
   }, [])
   return (
     <main ref={elemRef}>
-      <Container className='h-[calc(100vh_-_104px)]'>
-        <div className='w-full py-20 px-10 grid md:grid-rows-1 md:grid-cols-2'>
+      <Container className='h-[calc(100vh_-_104px)] overflow-hidden'>
+        <div className='w-full py-20 px-10 grid lg:grid-rows-1 lg:grid-cols-2 h-full '>
           <div className='flex flex-col items-start justify-center'>
             <Typography.Heading
               variant='h6'
@@ -97,19 +97,21 @@ const HeroSection: React.FC<{}> = () => {
               />
             </div>
           </div>
-          <div className=' h-[600px] relative hidden md:block'>
-            <Image
-              src={'/hero_image.png'}
-              width={500}
-              height={500}
-              alt='hero image'
-              className='absolute right-0 top-0 z-0'
-              ref={imgRef}
-            />
-            <div
-              className='absolute -bottom-10 left-0'
-              ref={chatRef}>
-              <FloatingChatImage />
+          <div className='h-max lg:h-full lg:flex justify-end items-center w-full hidden'>
+            <div className='relative'>
+              <Image
+                src={'/hero_image.png'}
+                width={500}
+                height={500}
+                alt='hero image'
+                className='z-0 relative'
+                ref={imgRef}
+              />
+              <div
+                className='w-60 lg:w-96 absolute -bottom-20 -left-32'
+                ref={chatRef}>
+                <FloatingChatImage />
+              </div>
             </div>
           </div>
         </div>
@@ -121,7 +123,7 @@ const HeroSection: React.FC<{}> = () => {
           className='absolute -z-10 top-0 md:left-0 w-full -left-20  md:w-1/2'
         />
         <Image
-          src={'/blur_effect_top_left.png'}
+          src={'/blur_effect_message.png'}
           width={700}
           height={500}
           alt='effect'
