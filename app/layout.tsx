@@ -1,8 +1,10 @@
 import React from 'react'
-import './globals.css'
+import { Toaster } from 'react-hot-toast'
+
 import NavBar from '@/components/NavBar'
-import Image from 'next/image'
 import Footer from '@/components/Footer'
+
+import './globals.css'
 
 interface Props {
   children: React.ReactNode
@@ -15,6 +17,7 @@ export default function RootLayout({ children }: Props) {
         <NavBar />
         {children}
         <Footer />
+        <Toaster position='bottom-left' reverseOrder={false} />
         <script
           type='text/javascript'
           id='hs-script-loader'

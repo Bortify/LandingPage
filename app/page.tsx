@@ -1,4 +1,5 @@
 import CTA from '@/components/CTA'
+import EmailCollectionBox from '@/components/EmailCollectionBox'
 import HeroSection from '@/components/HeroSection'
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <>
       <HeroSection />
       <CTA/>
+      <EmailCollectionBox/>
     </>
   )
 }
