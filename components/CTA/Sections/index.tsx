@@ -45,7 +45,7 @@ const Section: React.FC<SectionPropTypes> = ({
     AttachObserver(
       ref.current,
       {
-        threshold: 0.5,
+        threshold: 0.3,
       },
       (entries, observer) => {
         entries.forEach((entry) => {
@@ -57,7 +57,7 @@ const Section: React.FC<SectionPropTypes> = ({
   }, [])
   return (
     <div
-      className='h-[calc(100vh_-_104px)] flex items-center justify-center'
+      className='lg:h-[calc(100vh_-_104px)] h-[50vh] flex items-center justify-center'
       data-component={component}
       ref={ref}>
       <div className='w-full' ref={ref}>

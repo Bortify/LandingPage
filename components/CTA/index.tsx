@@ -4,6 +4,8 @@ import Container from '../Container'
 import Typography from '../Typography'
 import Section from './Sections'
 import Image from 'next/image'
+import { Button } from '../ui/button'
+import { MoveRight } from 'lucide-react'
 
 const CTA: React.FC<{}> = () => {
   const staticContainerRef = useRef<HTMLDivElement>(null)
@@ -29,8 +31,8 @@ const CTA: React.FC<{}> = () => {
         eCommerce Efficiency
       </Typography.Heading>
       <Container>
-        <div className='grid w-full grid-cols-2'>
-          <div className='px-10 relative'>
+        <div className='lg:grid lg:grid-rows-1 lg:grid-cols-2 hidden w-full'>
+          <div className='px-10'>
             {ContentArray.map((item, index) => (
               <Section
                 {...item}
@@ -49,7 +51,7 @@ const CTA: React.FC<{}> = () => {
           </div>
           <div
             ref={staticContainerRef}
-            className='h-[calc(100vh_-_104px)] sticky top-[104px] flex items-center justify-start w-full overflow-hidden'>
+            className='lg:h-[calc(100vh_-_104px)] h-[calc(50vh_-_104px)] sticky top-[104px] flex items-center justify-start lg:w-full w-screen overflow-hidden bg-white'>
             <div className='w-full h-full relative'>
               <div
                 ref={dynamicContainerRef}
@@ -71,13 +73,44 @@ const CTA: React.FC<{}> = () => {
                       width={600}
                       height={600}
                       alt='image'
-                      className='transition-all duration-200 ease-in-out'
+                      className='transition-all duration-200 ease-in-out lg:w-[600px] w-[300px]'
                     />
                   </div>
                 ))}
               </div>
             </div>
           </div>
+        </div>
+        <div className='block lg:hidden w-full'>
+          {ContentArray.map(({ title, paragraph, component, link }, index) => (
+            <section
+              key={index}
+              className='h-min w-full flex items-center justify-center flex-col px-10 py-10'>
+              <Image
+                src={component}
+                width={500}
+                height={300}
+                alt='image'
+                className='w-full sm:w-[500px]'
+              />
+              <div className='w-full'>
+                <Typography.Heading
+                  variant='h3'
+                  boldness={700}
+                  className='mb-5'>
+                  {title}
+                </Typography.Heading>
+                <Typography.Content>{paragraph}</Typography.Content>
+                <Button
+                  href={link}
+                  variant='ghost'
+                  className='group px-0 font-semibold text-purple-900 hover:text-purple-900 mt-4'>
+                  Learn More{' '}
+                  <MoveRight className='ml-2 group-hover:translate-x-2 duration-300 ease-in-out transition-transform' />
+                </Button>
+              </div>
+            </section>
+          ))}
         </div>
       </Container>
     </>

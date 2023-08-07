@@ -58,20 +58,20 @@ const HeroSection: React.FC<{}> = () => {
           <div className='flex flex-col items-start justify-center'>
             <Typography.Heading
               variant='h6'
-              className='text-lg text-gray-500 mb-3'>
+              className='text-lg text-gray-500 mb-5'>
               GPT powered chat bot for e-commerce stores{' '}
             </Typography.Heading>
             <Typography.Heading
               variant='h1'
               boldness={800}
-              className='text-gray-900 mb-3'>
+              className='text-gray-900 mb-5'>
               Supercharge Your Shopify Store with{' '}
               <span className=' font-black text-transparent bg-clip-text bg-gradient-to-tr from-blue-600 to-green-600'>
                 GPT-Powered
               </span>{' '}
               Conversations!
             </Typography.Heading>
-            <Typography.Content size='xl' className='text-gray-600 mb-3'>
+            <Typography.Content size='xl' className='text-gray-600 mb-5'>
               Revolutionize your Shopify store with a GPT-powered AI chatbot to
               elevate customer engagement, streamline shopping experience, and
               supercharged sales.
