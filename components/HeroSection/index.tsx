@@ -77,7 +77,7 @@ const HeroSection: React.FC<{}> = () => {
               supercharged sales.
             </Typography.Content>
             <div className='flex gap-2.5 flex-wrap'>
-              <Button>Sign Up for Early Bird Discount</Button>
+              <Button>Get an Early Bird Discount</Button>
               <Button variant='ghost' className='group'>
                 Learn More{' '}
                 <MoveRight className='ml-2 group-hover:translate-x-2 duration-300 ease-in-out transition-transform' />
