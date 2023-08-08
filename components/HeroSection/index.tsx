@@ -4,11 +4,12 @@ import Image from 'next/image'
 import { DetailedHTMLProps, HTMLAttributes, useEffect, useRef } from 'react'
 
 import { cn } from '@/lib/utils'
+import { AttachObserver, BuildThresholdList } from '@/utils/intersection'
 
 import Container from '../Container'
 import Typography from '../Typography'
 import { Button } from '../ui/button'
-import { AttachObserver, BuildThresholdList } from '@/utils/intersection'
+import { EmailCollectionDialog } from '../EmailCollectionBox'
 
 const HeroSection: React.FC<{}> = () => {
   const elemRef = useRef<HTMLDivElement>(null)
@@ -92,7 +93,9 @@ const HeroSection: React.FC<{}> = () => {
               supercharged sales.
             </Typography.Content>
             <div className='flex gap-2.5 flex-wrap'>
-              <Button>Get an Early Bird Discount</Button>
+              <EmailCollectionDialog>
+                <Button>Get an Early Bird Discount</Button>
+              </EmailCollectionDialog>
               <Button variant='ghost' className='group lg:flex hidden'>
                 Learn More{' '}
                 <MoveRight className='ml-2 group-hover:translate-x-2 duration-300 ease-in-out transition-transform' />

@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { collectEmail } from '@/clients/hubspot'
 import { useForm } from 'react-hook-form'
 
+import { toast } from 'react-hot-toast'
 import Container from '../Container'
 import Typography from '../Typography'
 import { Input } from '../ui/input'
@@ -14,31 +15,21 @@ import { Form, FormControl, FormField, FormItem } from '../ui/form'
 import { Button } from '../ui/button'
 import { useState } from 'react'
 import Spinner from '../Spinner'
-import { toast } from 'react-hot-toast'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 
 const formSchema = zod.object({
   email: zod.string().email('Email is required.'),
 })
 
-const EmailCollectionBox: React.FC<{}> = () => {
-  const form = useForm<zod.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-  })
-  const [loading, setLoading] = useState<boolean>(false)
-
-  async function onSubmit(values: zod.infer<typeof formSchema>) {
-    setLoading(true)
-    try {
-      await collectEmail(values.email)
-      toast.success("We've recieved your email!")
-      form.reset()
-    } catch (e) {
-      toast.error('Something Bad occured :(')
-    } finally {
-      setLoading(false)
-    }
-  }
-
+export const EmailCollectionBox: React.FC<{}> = () => {
   return (
     <Container>
       <div className='px-10 py-32 grid place-content-center relative overflow-hidden'>
@@ -56,32 +47,7 @@ const EmailCollectionBox: React.FC<{}> = () => {
             experience our AI-powered chatbot.
           </Typography.Content>
           <div className='w-full max-w-[600px] px-5 py-7 rounded-md shadow-md bg-white'>
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className='flex flex-col gap-2.5'>
-                <FormField
-                  control={form.control}
-                  name='email'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input
-                          placeholder='Enter your email address'
-                          required
-                          type='email'
-                          {...field}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                <Button type='submit' disabled={loading}>
-                  {loading ? <Spinner size={5}/> : 'Submit'}
-                </Button>
-                <span className='block text-center text-xs'>{`Your email is 100% confidential and won't send you any spam.`}</span>
-              </form>
-            </Form>
+            <EmailCollectionForm />
           </div>
         </div>
         <Image
@@ -96,4 +62,70 @@ const EmailCollectionBox: React.FC<{}> = () => {
   )
 }
 
-export default EmailCollectionBox
+export const EmailCollectionDialog: React.FC<{ children: any }> = ({ children }) => (
+  <Dialog>
+    <DialogTrigger asChild>{children}</DialogTrigger>
+    <DialogContent className='sm:max-w-[600px] p-10'>
+      <DialogHeader>
+        <DialogTitle>Sign Up for an Early Bird Offer of 40%</DialogTitle>
+        <DialogDescription className='pt-2'>
+          {`🚀 Don't Miss Out! 🌟 Sign Up Now for Exclusive Early Bird Discounts!
+          🎉`}
+        </DialogDescription>
+      </DialogHeader>
+      <div className='w-full mt-7 rounded-md bg-white'>
+        <EmailCollectionForm />
+      </div>
+    </DialogContent>
+  </Dialog>
+)
+
+const EmailCollectionForm: React.FC<{}> = () => {
+  const form = useForm<zod.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+  })
+
+  const [loading, setLoading] = useState<boolean>(false)
+
+  async function onSubmit(values: zod.infer<typeof formSchema>) {
+    setLoading(true)
+    try {
+      await collectEmail(values.email)
+      toast.success("We've recieved your email!")
+      form.reset()
+    } catch (e) {
+      toast.error('Something Bad occured :(')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className='flex flex-col gap-2.5'>
+        <FormField
+          control={form.control}
+          name='email'
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input
+                  placeholder='Enter your email address'
+                  required
+                  type='email'
+                  {...field}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <Button type='submit' disabled={loading}>
+          {loading ? <Spinner size={5} /> : 'Submit'}
+        </Button>
+        <span className='block text-center text-xs'>{`Your email is 100% confidential and won't send you any spam.`}</span>
+      </form>
+    </Form>
+  )
+}

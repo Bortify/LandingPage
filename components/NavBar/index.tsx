@@ -8,6 +8,7 @@ import { Button } from '../ui/button'
 import Link from '../Link'
 import Fonts from '../Typography/Font'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
+import { EmailCollectionDialog } from '../EmailCollectionBox'
 
 const NavBar: React.FC<{}> = () => (
   <nav
@@ -29,7 +30,9 @@ const NavBar: React.FC<{}> = () => (
             {label}
           </Link>
         ))}
-        <Button variant={'default'}>Explore</Button>
+        <EmailCollectionDialog>
+          <Button variant={'default'}>Explore</Button>
+        </EmailCollectionDialog>
       </div>
       <div className='block md:hidden'>
         <CollapsableNav />
@@ -53,7 +56,9 @@ const CollapsableNav: React.FC<{}> = () => {
             {label}
           </Link>
         ))}
-        <Button variant={'default'}>Explore</Button>
+        <EmailCollectionDialog>
+          <Button variant={'default'}>Explore</Button>
+        </EmailCollectionDialog>
       </PopoverContent>
     </Popover>
   )
@@ -72,6 +77,6 @@ const LINKS = [
   },
   {
     label: 'Contact Us',
-    href: '/#',
+    href: '/contact',
   },
 ]
